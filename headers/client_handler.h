@@ -1,0 +1,6 @@
+#ifndef SS_PROJECT_HEADERS_CLIENT_HANDLER_H
+#define SS_PROJECT_HEADERS_CLIENT_HANDLER_H
+
+void client_handler(int connfd);
+
+#endif  //  SS_PROJECT_HEADERS_CLIENT_HANDLER_H
