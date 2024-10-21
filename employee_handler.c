@@ -1,8 +1,8 @@
-
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include <stdbool.h>
+#include <sys/socket.h>
 
 struct loan {
   int account;
@@ -13,7 +13,7 @@ struct Employee {
     int account_id;
     char password[50];
     char employee_name[50];
-    loan assigned_loan_requests[100];
+    struct loan assigned_loan_requests[100];
 };
 struct Customer {
     int account_id;
@@ -93,7 +93,7 @@ void emp_logged_in(int ac, int new_socket){
       read(new_socket, new_customer_name, sizeof(new_customer_name));
       read(new_socket, new_password, sizeof(new_password));
       read(new_socket, &new_bank_balance, sizeof(new_bank_balance));
-      modify_customer_info(new_customer_name, new_password, new_bank_balance);
+      modify_customer_info(ac2,new_customer_name, new_password, new_bank_balance);
     case 2:
 
       

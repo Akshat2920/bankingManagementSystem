@@ -168,7 +168,7 @@ void cust_logged_in(int ac, int new_socket){
       memset(cust_buffer, 0, sizeof(cust_buffer));
       break;
     default:
-      strcpy(buffer, "Invalid choice\n");
+      strcpy(cust_buffer, "Invalid choice\n");
       break;
   }
 }
@@ -180,9 +180,9 @@ void handle_customer(int new_socket) {
         case 1:
             strcpy(buffer, "CREATE_USER");
             send(new_socket, buffer, strlen(buffer), 0);
-            char customer_name[50];
+            char customer_name[1024];
             read(new_socket, customer_name, sizeof(customer_name));
-            char password_new[50];
+            char password_new[1024];
             read(new_socket, password_new, sizeof(password_new));
             int id = create_customer(customer_name, password_new);
             break;
