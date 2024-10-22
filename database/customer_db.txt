@@ -1,7 +1,2 @@
-1,123,dhruva,0.00,not applied
-2,123,akshat,0.00,not applied
-3,password1,aryan,0.00,not applied
-4,password2,mohit,0.00,not applied
-5,password3,jj,0.00,not applied
-6,password,johnson,0.00,not applied
-7,dejalde,dejalde,0.00,not applied
+1,password,akshat,0.00,not applied
+2,pwd,Akshat,0.00,not applied
