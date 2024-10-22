@@ -149,9 +149,11 @@ void cust_logged_in(int ac, int new_socket){
       withdraw_money(ac, amt);
       memset(cust_buffer, 0, sizeof(cust_buffer));
       break;
-    case 3:
+    case 3:     
+      printf("Before buffer");
       strcpy(cust_buffer, "GET_AMMOUNT");
       send(new_socket, cust_buffer, strlen(cust_buffer), 0);
+      printf("Sent to buffer");
       read(new_socket, &amt, sizeof(amt));
       withdraw_money(ac, amt*-1);
       memset(cust_buffer, 0, sizeof(cust_buffer));

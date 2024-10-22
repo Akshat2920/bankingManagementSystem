@@ -107,16 +107,7 @@ int main() {
         send(sock, &amt, sizeof(amt), 0);
         memset(buffer, 0, sizeof(buffer));
         
-      } else if (strcmp(buffer, "GET_AMMOUNT") == 0) {
-        double amt;
-        printf("Enter ammount: ");
-        scanf("%lf", &amt);
-        send(sock, &amt, sizeof(amt), 0);
-        printf("enter reciever account id: ");
-        choose(sock);
-        memset(buffer, 0, sizeof(buffer));
-
-      } else if(strcmp(buffer, "EMPLOYEE_BASE") == 0) {
+      }  else if(strcmp(buffer, "EMPLOYEE_BASE") == 0) {
         employee_base();
         printf("Enter your choice: ");
         choose(sock);
@@ -143,7 +134,7 @@ int main() {
         to_serv(sock);
         memset(buffer, 0, sizeof(buffer));
       
-      } else { break; }
+      } else { printf("Error");break; }
     }
   memset(buffer, 0, sizeof(buffer));
   return 0;
