@@ -1,5 +1,3 @@
-
-
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -20,7 +18,7 @@ void to_client(int sock, char* arg){
 
 int create_customer(const char* customer_name, const char* password) {
     struct Customer new_customer;
-    FILE* file_read = fopen("../database/customer_db.txt", "r");
+    FILE* file_read = fopen("database/customer_db.txt", "r");
     int last_customer_id = 0;
     char line[256];
     while(fgets(line, sizeof(line), file_read)) {
@@ -33,7 +31,7 @@ int create_customer(const char* customer_name, const char* password) {
     strcpy(new_customer.password, password);
     new_customer.bank_balance = 0;
     strcpy(new_customer.loan_status, "not applied");
-    FILE* file = fopen("../database/customer_db.txt", "a");
+    FILE* file = fopen("database/customer_db.txt", "a");
     if (file != NULL) {
         fprintf(file, "%d,%s,%s,%.2f,%s\n", new_customer.account_id, new_customer.password, new_customer.customer_name, new_customer.bank_balance, new_customer.loan_status);
         fclose(file);
@@ -42,7 +40,7 @@ int create_customer(const char* customer_name, const char* password) {
 }
 
 bool auth_login(int account_id, char* password){
-  FILE* file_read = fopen("../database/customer_db.txt", "r");
+  FILE* file_read = fopen("database/customer_db.txt", "r");
   if(file_read == NULL) {
     perror("read");
     return false;
@@ -64,7 +62,7 @@ bool auth_login(int account_id, char* password){
   return false;
 }
 int get_customer_info(int account_id, char* buffer, size_t buffer_size) {
-    FILE* file = fopen("../database/customer_db.txt", "r");
+    FILE* file = fopen("database/customer_db.txt", "r");
     if (file == NULL) {
         return 0;
     }
@@ -89,16 +87,16 @@ int get_customer_info(int account_id, char* buffer, size_t buffer_size) {
 }
 
 int withdraw_money(int account_id, double amount) {
-    FILE* file = fopen("../database/customer_db.txt", "r+");
+    FILE* file = fopen("database/customer_db.txt", "r+");
     if (file == NULL) {
         return 0; // File opening failed
     }
     char line[256];
     int file_account_id;
-    char password[50], customer_name[50], loan_status[20];
+    char  password[50], customer_name[50], loan_status[20];
     double bank_balance;
     long int position;
-    FILE* temp_file = fopen("../database/temp_db.txt", "w");
+    FILE* temp_file = fopen("database/temp_db.txt", "w");
     if (temp_file == NULL) {
         fclose(file);
         return 0; // Temporary file creation failed
@@ -113,7 +111,7 @@ int withdraw_money(int account_id, double amount) {
             } else {
                 fclose(file);
                 fclose(temp_file);
-                remove("../database/temp_db.txt"); // Cleanup
+                remove("database/temp_db.txt"); // Cleanup
                 return -1; // Insufficient funds
             }
         }
@@ -122,11 +120,11 @@ int withdraw_money(int account_id, double amount) {
     fclose(file);
     fclose(temp_file);
     if (!account_found) {
-        remove("../database/temp_db.txt"); // Cleanup if account not found
+        remove("database/temp_db.txt"); // Cleanup if account not found
         return 0; // Account not found
     }
-    remove("../database/customer_db.txt");
-    rename("../database/temp_db.txt", "../database/customer_db.txt");
+    remove("database/customer_db.txt");
+    rename("database/temp_db.txt", "database/customer_db.txt");
     return 1; // Withdrawal successful
 }
 void cust_logged_in(int ac, int new_socket){

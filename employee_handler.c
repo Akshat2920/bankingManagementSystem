@@ -24,8 +24,8 @@ struct Customer_info {
 };
 
 void modify_customer_info(int account_id, const char* new_customer_name, const char* new_password, double new_bank_balance) {
-    FILE* file_read = fopen("../database/customer_db.txt", "r");
-    FILE* temp_file = fopen("../database/temp_db.txt", "w");
+    FILE* file_read = fopen("database/customer_db.txt", "r");
+    FILE* temp_file = fopen("database/temp_db.txt", "w");
     if (file_read == NULL || temp_file == NULL) {
         printf("Error opening file.\n");
         return;
@@ -45,7 +45,7 @@ void modify_customer_info(int account_id, const char* new_customer_name, const c
     }
     fclose(file_read);
     fclose(temp_file);
-    rename("../database/temp_db.txt", "../database/customer_db.txt");
+    rename("database/temp_db.txt", "database/customer_db.txt");
 }
 
 void to_Client(int sock, char* arg){
@@ -54,7 +54,7 @@ void to_Client(int sock, char* arg){
   memset(arg, 0, sizeof(arg));
 }
 bool auth_Login(int account_id, char* password){
-  FILE* file_read = fopen("../database/employee_db.txt", "r");
+  FILE* file_read = fopen("database/employee_db.txt", "r");
   if(file_read == NULL) {
     perror("read");
     return false;
