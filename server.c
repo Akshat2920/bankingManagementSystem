@@ -27,10 +27,10 @@ void menu(int new_socket) {
             handle_employee(new_socket);
             break;
         case 3:
-            strcpy(buffer, "Bank Employee access chosen\n");
+            strcpy(buffer, "Manager access chosen\n");
             break;
         case 4:
-            strcpy(buffer, "Manager access chosen\n");
+            strcpy(buffer, "Admin access chosen\n");
             break;
         default:
             strcpy(buffer, "Invalid choice\n");
